@@ -11,7 +11,7 @@ export const Layout = () => {
       const response = await axios.get(
         'https://data.nasa.gov/resource/y77d-th95.json'
       )
-      setData(response)
+      setData(response.data)
     }
 
     getLocations()
