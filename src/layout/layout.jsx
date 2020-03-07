@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Header } from './header'
 import { Body } from './body'
 import axios from 'axios'
+import { MapContainer } from 'components/map-container'
 
 export const Layout = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState()
 
   useEffect(() => {
     const getLocations = async () => {
@@ -20,9 +21,7 @@ export const Layout = () => {
   return (
     <div>
       <Header />
-      <Body>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      </Body>
+      <Body>{data && <MapContainer data={data} />}</Body>
     </div>
   )
 }
