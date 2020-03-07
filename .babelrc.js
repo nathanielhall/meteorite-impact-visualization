@@ -1,3 +1,5 @@
+// FIXME:
+
 module.exports = (api) => {
   const isTest = api.env('test')
 
@@ -10,7 +12,7 @@ module.exports = (api) => {
         '@babel/preset-env',
         {
           targets: {
-            browsers: ['last 2 versions']
+            esmodules: true
           },
           modules: isTest ? 'commonjs' : false
         }
