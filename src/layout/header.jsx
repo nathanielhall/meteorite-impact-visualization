@@ -4,10 +4,8 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  IconButton
+  Button
 } from '@material-ui/core'
-
-import MenuIcon from '@material-ui/icons/Menu'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +25,11 @@ export const Header = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="menu"
-        >
-          <MenuIcon />
-        </IconButton>
         <Typography variant="h6" className={classes.title}>
           Meteorite Impact Locations
         </Typography>
+
+        <Button color="inherit">Filter</Button>
       </Toolbar>
     </AppBar>
   )
