@@ -33,6 +33,7 @@ module.exports = {
     // Import-specific rules
     'import/no-default-export': 2, // Prohibit default exports
     //'import/no-unresolved': 2,
+    'import/no-unused-modules': 2,
     'import/no-duplicates': 2, // Reports if a resolved path is imported more than once.
 
     // React-specific Rules
