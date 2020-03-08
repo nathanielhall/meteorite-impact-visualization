@@ -26,6 +26,8 @@
     "@babel/preset-react": "^7.8.3",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
@@ -37,7 +39,6 @@
     "prettier": "^1.18.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-test-renderer": "^16.11.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
@@ -50,5 +51,23 @@
     "date-fns": "^2.10.0",
     "leaflet": "^1.6.0",
     "react-leaflet": "^2.6.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleNameMapper": {
+      "^src(.*)$": "<rootDir>/src$1",
+      "^components(.*)$": "<rootDir>/src/components$1"
+    },
+    "modulePaths": [
+      "src"
+    ],
+    "setupFilesAfterEnv": [
+      "./enzyme.config.js"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test))\\.jsx?$",
+    "verbose": true
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import MuiTextField from '@material-ui/core/TextField'
 
-export const Textbox = ({ name, label, onBlur, onChange, value }) => (
+export const TextBox = ({ name, label, onBlur, onChange, value }) => (
   <MuiTextField
     name={name}
     label={label}
