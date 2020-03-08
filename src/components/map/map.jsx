@@ -1,9 +1,18 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
 import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/core/styles'
+import { MapPopup } from './map-popup'
 
-// FIXME: more props for config
+const useStyles = makeStyles({
+  popup: {
+    width: '310px'
+  }
+})
+
 export const Map = ({ data }) => {
+  const classes = useStyles()
+
   return (
     <LeafletMap
       style={{ width: '100%', height: '100vh' }}
@@ -22,7 +31,9 @@ export const Map = ({ data }) => {
               key={location.id}
               position={[location.reclat, location.reclong]}
             >
-              <Popup>{location.name}</Popup>
+              <Popup className={classes.popup}>
+                <MapPopup location={location} />
+              </Popup>
             </Marker>
           )
       )}
