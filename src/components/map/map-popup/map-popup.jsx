@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import MuiTextField from '@material-ui/core/TextField'
+import { Textbox } from 'components/text-box'
+import { DatePicker } from 'components/date-picker'
 import { useLocalStorateState } from 'components/local-storage'
 
 export const MapPopup = ({ location }) => {
@@ -26,6 +27,10 @@ export const MapPopup = ({ location }) => {
         label="Year"
         onChange={handleChange}
         value={year}
+        format="yyyy"
+        views={['year']}
+        autoOk
+        disableFuture
       />
       <Textbox
         name="nametype"
@@ -61,49 +66,4 @@ MapPopup.propTypes = {
       coordinates: PropTypes.arrayOf(PropTypes.number)
     })
   })
-}
-
-const Textbox = ({ name, label, onBlur, onChange, value }) => (
-  <MuiTextField
-    name={name}
-    label={label}
-    onChange={onChange}
-    onBlur={onBlur}
-    value={value}
-    fullWidth
-    InputLabelProps={{
-      shrink: true
-    }}
-  />
-)
-
-import DateFnsUtils from '@date-io/date-fns'
-import {
-  KeyboardDatePicker as MuiDatePicker,
-  MuiPickersUtilsProvider
-} from '@material-ui/pickers'
-
-export const DatePicker = ({ name, value, onChange, label }) => {
-  const onChangeHandler = (value) => {
-    const event = {
-      target: { name, value }
-    }
-    onChange(event)
-  }
-
-  return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <MuiDatePicker
-        name={name}
-        value={value}
-        onChange={onChangeHandler}
-        label={label}
-        variant="inline"
-        views={['year']}
-        format="yyyy"
-        disableFuture
-        autoOk
-      />
-    </MuiPickersUtilsProvider>
-  )
 }
