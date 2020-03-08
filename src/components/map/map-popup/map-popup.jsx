@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Textbox } from 'components/text-box'
+import { TextBox } from 'components/text-box'
 import { DatePicker } from 'components/date-picker'
 import { useLocalStorateState } from 'components/local-storage'
 
@@ -21,7 +21,7 @@ export const MapPopup = ({ location }) => {
   const { name, year, nametype, recclass, mass, fall } = values
   return (
     <form noValidate>
-      <Textbox name="name" label="Name" onChange={handleChange} value={name} />
+      <TextBox name="name" label="Name" onChange={handleChange} value={name} />
       <DatePicker
         name="year"
         label="Year"
@@ -32,20 +32,20 @@ export const MapPopup = ({ location }) => {
         autoOk
         disableFuture
       />
-      <Textbox
+      <TextBox
         name="nametype"
         label="Type"
         onChange={handleChange}
         value={nametype}
       />
-      <Textbox
+      <TextBox
         name="recclass"
         label="Recclass"
         onChange={handleChange}
         value={recclass}
       />
-      <Textbox name="mass" label="Mass" onChange={handleChange} value={mass} />
-      <Textbox name="fall" label="Fall" onChange={handleChange} value={fall} />
+      <TextBox name="mass" label="Mass" onChange={handleChange} value={mass} />
+      <TextBox name="fall" label="Fall" onChange={handleChange} value={fall} />
     </form>
   )
 }

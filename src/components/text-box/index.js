@@ -1,1 +1,1 @@
-export { Textbox } from './text-box'
+export { TextBox } from './text-box'
