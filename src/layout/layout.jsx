@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Header } from './header'
-import { Body } from './body'
 import axios from 'axios'
 import { MapContainer } from 'components/map-container'
 
@@ -20,8 +18,7 @@ export const Layout = () => {
 
   return (
     <div>
-      <Header />
-      <Body>{data && <MapContainer data={data} />}</Body>
+      <main>{data && <MapContainer data={data} />}</main>
     </div>
   )
 }
