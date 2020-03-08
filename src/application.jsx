@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { MapContainer } from 'components/map-container'
+import { Map } from 'components/map'
 
 export const Application = () => {
   const [data, setData] = useState()
@@ -18,7 +18,7 @@ export const Application = () => {
 
   return (
     <div>
-      <main>{data && <MapContainer data={data} />}</main>
+      <main>{data && <Map data={data} />}</main>
     </div>
   )
 }

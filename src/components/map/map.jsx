@@ -1,10 +1,11 @@
 import React from 'react'
-import { Map, TileLayer, Marker } from 'react-leaflet'
+import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
 import PropTypes from 'prop-types'
 
-export const MapContainer = ({ data }) => {
+// FIXME: more props for config
+export const Map = ({ data }) => {
   return (
-    <Map
+    <LeafletMap
       style={{ width: '100%', height: '100vh' }}
       center={[45.4, -75.7]}
       zoom={3}
@@ -20,13 +21,15 @@ export const MapContainer = ({ data }) => {
             <Marker
               key={location.id}
               position={[location.reclat, location.reclong]}
-            />
+            >
+              <Popup>{location.name}</Popup>
+            </Marker>
           )
       )}
-    </Map>
+    </LeafletMap>
   )
 }
 
-MapContainer.propTypes = {
+Map.propTypes = {
   data: PropTypes.array
 }
