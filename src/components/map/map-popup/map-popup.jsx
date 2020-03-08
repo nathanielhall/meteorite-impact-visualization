@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import MuiTextField from '@material-ui/core/TextField'
+import { useLocalStorateState } from 'components/local-storage'
 
 export const MapPopup = ({ location }) => {
-  const [values, setValues] = useState(location)
+  const [values, setValues] = useLocalStorateState(location.id, location)
 
   const handleChange = (event) => {
     const target = event.target
@@ -18,7 +19,7 @@ export const MapPopup = ({ location }) => {
     }))
   }
 
-  const { name, year, nametype, reclass, mass, fall } = values
+  const { name, year, nametype, recclass, mass, fall } = values
   return (
     <form noValidate>
       <Textbox name="name" label="Name" onChange={handleChange} value={name} />
@@ -30,10 +31,10 @@ export const MapPopup = ({ location }) => {
         value={nametype}
       />
       <Textbox
-        name="reclass"
-        label="Reclass"
+        name="recclass"
+        label="Recclass"
         onChange={handleChange}
-        value={reclass}
+        value={recclass}
       />
       <Textbox name="mass" label="Mass" onChange={handleChange} value={mass} />
       <Textbox name="fall" label="Fall" onChange={handleChange} value={fall} />
@@ -67,9 +68,6 @@ const Textbox = ({ name, label, onBlur, onChange, value }) => (
     onBlur={onBlur}
     value={value}
     fullWidth
-    InputProps={{
-      disableUnderline: true
-    }}
     InputLabelProps={{
       shrink: true
     }}
