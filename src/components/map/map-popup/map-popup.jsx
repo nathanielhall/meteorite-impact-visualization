@@ -11,8 +11,6 @@ export const MapPopup = ({ location }) => {
     const value = target.value
     const name = target.name
 
-    event.persist()
-
     setValues((prevState) => ({
       ...prevState,
       [name]: value
@@ -23,7 +21,12 @@ export const MapPopup = ({ location }) => {
   return (
     <form noValidate>
       <Textbox name="name" label="Name" onChange={handleChange} value={name} />
-      <Textbox name="year" label="Year" onChange={handleChange} value={year} />
+      <DatePicker
+        name="year"
+        label="Year"
+        onChange={handleChange}
+        value={year}
+      />
       <Textbox
         name="nametype"
         label="Type"
@@ -73,3 +76,34 @@ const Textbox = ({ name, label, onBlur, onChange, value }) => (
     }}
   />
 )
+
+import DateFnsUtils from '@date-io/date-fns'
+import {
+  KeyboardDatePicker as MuiDatePicker,
+  MuiPickersUtilsProvider
+} from '@material-ui/pickers'
+
+export const DatePicker = ({ name, value, onChange, label }) => {
+  const onChangeHandler = (value) => {
+    const event = {
+      target: { name, value }
+    }
+    onChange(event)
+  }
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <MuiDatePicker
+        name={name}
+        value={value}
+        onChange={onChangeHandler}
+        label={label}
+        variant="inline"
+        views={['year']}
+        format="yyyy"
+        disableFuture
+        autoOk
+      />
+    </MuiPickersUtilsProvider>
+  )
+}
