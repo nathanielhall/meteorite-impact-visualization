@@ -31,8 +31,8 @@ module.exports = {
     'default-case': 1,
 
     // Import-specific rules
+    'import/no-unresolved': 0,
     'import/no-default-export': 2, // Prohibit default exports
-    //'import/no-unresolved': 2,
     'import/no-unused-modules': 2,
     'import/no-duplicates': 2, // Reports if a resolved path is imported more than once.
 
