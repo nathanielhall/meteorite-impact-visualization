@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TextBox } from 'components/text-box'
-import { DatePicker } from 'components/date-picker'
+import { TextBox } from 'components/inputs/text-box'
+import { DatePicker } from 'components/inputs/date-picker'
 import { useLocalStorateState } from 'components/local-storage'
 
 export const MapPopup = ({ location }) => {
