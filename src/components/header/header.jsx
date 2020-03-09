@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  makeStyles,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button
-} from '@material-ui/core'
+import { makeStyles, AppBar, Toolbar, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,17 +13,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export const Header = () => {
+export const Header = ({ title, children }) => {
   const classes = useStyles()
 
   return (
     <AppBar position="static">
-      <Toolbar variant="dense">
+      <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          Meteorite Impact Locations
+          {title}
         </Typography>
-
-        <Button color="inherit">Filter</Button>
+        {children}
       </Toolbar>
     </AppBar>
   )

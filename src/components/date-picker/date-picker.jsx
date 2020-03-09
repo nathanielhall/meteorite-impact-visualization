@@ -34,6 +34,7 @@ export const DatePicker = ({
         format={format}
         disableFuture={disableFuture}
         autoOk={autoOk}
+        invalidDateMessage={''}
       />
     </MuiPickersUtilsProvider>
   )
