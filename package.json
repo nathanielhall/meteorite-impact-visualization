@@ -7,6 +7,7 @@
     "build": "webpack --progress --colors --mode=production",
     "start": "webpack-dev-server --config webpack.config.js --progress --colors --open --mode=development",
     "test": "jest",
+    "tests:watch": "jest --watch",
     "prettier": "prettier --write \"./**/*.{json,js,jsx,scss}\""
   },
   "keywords": [
@@ -68,7 +69,6 @@
     "setupFilesAfterEnv": [
       "./enzyme.config.js"
     ],
-    "testRegex": "(/__tests__/.*|(\\.|/)(test))\\.jsx?$",
-    "verbose": true
+    "testRegex": "(/__tests__/.*|(\\.|/)(test))\\.jsx?$"
   }
 }
