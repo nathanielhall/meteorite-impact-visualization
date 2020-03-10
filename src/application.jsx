@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Map } from 'components/map'
-// import { Header } from 'components/header'
+import { Header } from 'components/header'
+import Button from '@material-ui/core/Button'
 // import { DateRange } from 'components/date-range'
 
 export const Application = () => {
@@ -29,13 +30,15 @@ export const Application = () => {
 
   return (
     <div>
-      {/* <Header title="Meteorite Impact Locations">
-        <DateRange
+      <Header title="Meteorite Impact Locations">
+        {/* <DateRange
           startDate={startDate}
           endDate={endDate}
           onSubmit={onSubmit}
-        />
-      </Header> */}
+        /> */}
+        <Button color="inherit">Edits</Button>
+        <Button color="inherit">Filter</Button>
+      </Header>
       <main>{data && <Map data={data} />}</main>
     </div>
   )
