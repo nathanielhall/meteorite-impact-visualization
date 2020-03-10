@@ -1,114 +1,100 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { TextBox } from 'components/inputs/text-box'
-import { DatePicker } from 'components/inputs/date-picker'
 
-export const MapPopup = ({ location }) => {
-  // const [values, setValues] = useState(location)
-
-  // const handleChange = (event) => {
-  //   const target = event.target
-  //   const value = target.value
-  //   const name = target.name
-
-  //   setValues((prevState) => ({
-  //     ...prevState,
-  //     [name]: value
-  //   }))
-  // }
-
-  const { id, name, year, nametype, recclass, mass, fall } = location
+export const MapPopup = ({
+  location: { id, name, nametype, recclass, mass, fall }
+}) => {
   return (
     <form noValidate>
+      <label htmlFor="name">Name</label>
       <LocalStorageFormControl id={id}>
-        <TextBox name="name" label="Name" value={name} />
+        <TextBox name="name" defaultValue={name} />
       </LocalStorageFormControl>
 
       <LocalStorageFormControl id={id}>
-        <DatePicker
-          name="year"
-          label="Year"
-          value={year}
-          format="yyyy"
-          views={['year']}
-          autoOk
-          disableFuture
-        />
+        <TextBox name="nametype" label="Type" defaultValue={nametype} />
       </LocalStorageFormControl>
 
       <LocalStorageFormControl id={id}>
-        <TextBox name="nametype" label="Type" value={nametype} />
+        <TextBox name="recclass" label="Recclass" defaultValue={recclass} />
       </LocalStorageFormControl>
 
       <LocalStorageFormControl id={id}>
-        <TextBox name="recclass" label="Recclass" value={recclass} />
+        <TextBox name="mass" label="Mass" defaultValue={mass} />
       </LocalStorageFormControl>
 
       <LocalStorageFormControl id={id}>
-        <TextBox name="mass" label="Mass" value={mass} />
-      </LocalStorageFormControl>
-
-      <LocalStorageFormControl id={id}>
-        <TextBox name="fall" label="Fall" value={fall} />
+        <TextBox name="fall" label="Fall" defaultValue={fall} />
       </LocalStorageFormControl>
     </form>
   )
 }
 
-MapPopup.propTypes = {
-  location: PropTypes.objectOf({
-    name: PropTypes.string,
-    id: PropTypes.number,
-    nametype: PropTypes.string,
-    recclass: PropTypes.string,
-    mass: PropTypes.number,
-    fall: PropTypes.string,
-    year: PropTypes.string,
-    reclat: PropTypes.number,
-    reclong: PropTypes.number,
-    geolocation: PropTypes.objectOf({
-      type: PropTypes.string,
-      coordinates: PropTypes.arrayOf(PropTypes.number)
-    })
-  })
-}
+// MapPopup.propTypes = {
+//   location: PropTypes.objectOf({
+//     name: PropTypes.string,
+//     id: PropTypes.number,
+//     nametype: PropTypes.string,
+//     recclass: PropTypes.string,
+//     mass: PropTypes.number,
+//     fall: PropTypes.string,
+//     year: PropTypes.string,
+//     reclat: PropTypes.number,
+//     reclong: PropTypes.number,
+//     geolocation: PropTypes.objectOf({
+//       type: PropTypes.string,
+//       coordinates: PropTypes.arrayOf(PropTypes.number)
+//     })
+//   })
+// }
 
-const callAll = (...fns) => (...args) => fns.forEach((fn) => fn && fn(...args))
+//const callAll = (...fns) => (...args) => fns.forEach((fn) => fn && fn(...args))
 
+// form control
 const LocalStorageFormControl = ({
   id,
   children,
   formControl = React.Children.only(children),
   lsKey = `${id}:${formControl.props.name}`
 }) => {
-  const [value, setValue] = useState(() => {
+  const accessLocalStorage = (key, defaultValue) => {
     let value
     try {
-      value =
-        JSON.parse(window.localStorage.getItem(lsKey)) ||
-        formControl.props.value
+      value = JSON.parse(window.localStorage.getItem(key)) || defaultValue
     } catch (e) {
-      value = formControl.props.value
+      value = defaultValue
     }
     return value
+  }
+
+  const [value, setValue] = useState(() => {
+    const value = accessLocalStorage(lsKey, formControl.props.defaultValue)
+
+    if (Array.isArray(value)) {
+      const { value: mostRecentValue } = value[value.length - 1]
+      return mostRecentValue
+    } else {
+      return value
+    }
   })
 
   React.useEffect(() => {
     if (value) {
-      window.localStorage.setItem(lsKey, JSON.stringify(value))
+      const allChanges = accessLocalStorage(lsKey, [])
+      const change = { timestamp: new Date().getTime(), value }
+
+      window.localStorage.setItem(
+        lsKey,
+        JSON.stringify([...allChanges, change])
+      )
     } else {
       window.localStorage.removeItem(lsKey)
     }
   }, [value, lsKey])
 
   return React.cloneElement(formControl, {
-    onChange: callAll(formControl.props.onChange, (e) =>
-      setValue(e.target.value)
-    ),
-    value
+    onBlur: (e) => setValue(e.target.value),
+    defaultValue: value
   })
 }
-
-// useEffect(() => {
-//   window.localStorage.setItem(key, JSON.stringify(state))
-// }, [state])

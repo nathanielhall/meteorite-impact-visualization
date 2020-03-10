@@ -1,7 +1,14 @@
 import React from 'react'
 import MuiTextField from '@material-ui/core/TextField'
 
-export const TextBox = ({ name, label, onBlur, onChange, value }) => (
+export const TextBox = ({
+  name,
+  label,
+  onBlur,
+  onChange,
+  value,
+  defaultValue
+}) => (
   <MuiTextField
     name={name}
     label={label}
@@ -11,6 +18,9 @@ export const TextBox = ({ name, label, onBlur, onChange, value }) => (
     fullWidth
     InputLabelProps={{
       shrink: true
+    }}
+    inputProps={{
+      defaultValue: defaultValue
     }}
   />
 )
