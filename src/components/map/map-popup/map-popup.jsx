@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 import { TextBox } from 'components/inputs/text-box'
 
 export const MapPopup = ({
