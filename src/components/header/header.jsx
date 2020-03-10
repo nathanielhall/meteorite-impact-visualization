@@ -18,7 +18,7 @@ export const Header = ({ title, children }) => {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar variant="dense">
         <Typography variant="h6" className={classes.title}>
           {title}
         </Typography>
