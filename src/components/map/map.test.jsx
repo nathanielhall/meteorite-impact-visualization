@@ -4,6 +4,7 @@ import { Map } from './map'
 
 const setup = (propOverrides) => {
   const props = {
+    data: [],
     ...propOverrides
   }
   const wrapper = mount(<Map {...props} />)
