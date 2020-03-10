@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { Header } from './header'
+import { Header } from './Header'
 
 const setup = (propOverrides) => {
   const props = {

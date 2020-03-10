@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { DatePicker } from './date-picker'
+import { DatePicker } from './DatePicker'
 import { KeyboardDatePicker as MuiDatePicker } from '@material-ui/pickers'
 
 const setup = (propOverrides) => {
