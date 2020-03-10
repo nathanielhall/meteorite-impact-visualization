@@ -5,7 +5,7 @@ export const LocalStorageFormControl = ({
   id,
   children,
   formControl = Children.only(children),
-  lsKey = `${id}:${formControl.props.name}`
+  lsKey = `mil:${id}:${formControl.props.name}`
 }) => {
   const accessLocalStorage = (key, defaultValue) => {
     let value
