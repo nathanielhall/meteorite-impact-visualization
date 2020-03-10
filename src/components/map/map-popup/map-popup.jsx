@@ -1,14 +1,27 @@
 import React from 'react'
 //import PropTypes from 'prop-types'
 import { TextBox } from 'components/inputs/text-box'
+import { DatePicker } from 'components/inputs/date-picker'
 import { LocalStorageFormControl } from 'components/local-storage'
 
 export const MapPopup = ({
-  location: { id, name, nametype, recclass, mass, fall }
+  location: { id, year, name, nametype, recclass, mass, fall }
 }) => (
   <form noValidate>
     <LocalStorageFormControl id={id}>
       <TextBox name="name" label="Name" defaultValue={name} />
+    </LocalStorageFormControl>
+
+    <LocalStorageFormControl id={id}>
+      <DatePicker
+        name="year"
+        label="Year"
+        defaultValue={year}
+        format="yyyy"
+        views={['year']}
+        autoOk
+        disableFuture
+      />
     </LocalStorageFormControl>
 
     <LocalStorageFormControl id={id}>
