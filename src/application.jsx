@@ -18,8 +18,6 @@ export const Application = () => {
     setEndDate(values.end)
   }
 
-  // TODO: Need more info on how the fitering should work
-  // TODO: Should the data ever re-import? Provide an import button? Import after filter?...
   useEffect(() => {
     const getLocations = async () => {
       const response = await axios.get(
