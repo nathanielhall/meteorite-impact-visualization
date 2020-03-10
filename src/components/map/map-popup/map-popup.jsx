@@ -8,11 +8,7 @@ export const MapPopup = ({
 }) => (
   <form noValidate>
     <LocalStorageFormControl id={id}>
-      <TextBox
-        name="name"
-        defaultValue={name}
-        onBlur={() => console.log('name changed')}
-      />
+      <TextBox name="name" label="Name" defaultValue={name} />
     </LocalStorageFormControl>
 
     <LocalStorageFormControl id={id}>
