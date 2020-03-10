@@ -9,7 +9,7 @@ import {
   Grid
 } from '@material-ui/core'
 
-export const DateRange = ({ startDate, endDate, onSubmit, onClose }) => {
+export const ImportDialog = ({ startDate, endDate, onSubmit, onClose }) => {
   const [values, setValues] = useState({
     start: startDate,
     end: endDate
