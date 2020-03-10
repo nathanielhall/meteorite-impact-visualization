@@ -7,7 +7,9 @@
     "build": "webpack --progress --colors --mode=production",
     "start": "webpack-dev-server --config webpack.config.js --progress --colors --open --mode=development",
     "test": "jest",
-    "tests:watch": "jest --watch",
+    "test:run": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js,.jsx",
     "prettier": "prettier --write \"./**/*.{json,js,jsx,scss}\""
   },
   "keywords": [
@@ -55,6 +57,10 @@
     "react-leaflet": "^2.6.1"
   },
   "jest": {
+    "coverageDirectory": "./coverage",
+    "coverageReporters": [
+      "cobertura"
+    ],
     "moduleFileExtensions": [
       "js",
       "jsx"
