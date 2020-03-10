@@ -7,6 +7,8 @@ export const LocalStorageFormControl = ({
   formControl = Children.only(children),
   lsKey = `mil:${id}:${formControl.props.name}`
 }) => {
+  const [hasChanged, setHasChanged] = useState(false)
+
   const accessLocalStorage = (key, defaultValue) => {
     let value
     try {
@@ -29,6 +31,8 @@ export const LocalStorageFormControl = ({
   })
 
   useEffect(() => {
+    if (!hasChanged) return
+
     if (value) {
       const allChanges = accessLocalStorage(lsKey, [])
       const change = { timestamp: new Date().toJSON(), value }
@@ -44,6 +48,9 @@ export const LocalStorageFormControl = ({
 
   return React.cloneElement(formControl, {
     onBlur: callAll(formControl.props.onBlur, (e) => setValue(e.target.value)),
+    onChange: callAll(formControl.props.onChange, (e) =>
+      setHasChanged(e.target.value)
+    ),
     defaultValue: value
   })
 }
