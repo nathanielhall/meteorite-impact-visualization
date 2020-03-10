@@ -33,6 +33,7 @@ export const DateRange = ({ startDate, endDate, onSubmit, onClose }) => {
         onSubmit={(e) => {
           e.preventDefault()
           onSubmit(values)
+          onClose()
         }}
       >
         <DialogContent>
@@ -67,10 +68,12 @@ export const DateRange = ({ startDate, endDate, onSubmit, onClose }) => {
         </DialogContent>
 
         <DialogActions>
-          <Button color="inherit" type="submit">
-            Filter
+          <Button color="primary" onClick={onClose}>
+            Close
           </Button>
-          <Button onClick={onClose}>Close</Button>
+          <Button color="primary" type="submit">
+            Import
+          </Button>
         </DialogActions>
       </form>
     </Dialog>

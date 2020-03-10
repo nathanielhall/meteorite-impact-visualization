@@ -18,16 +18,24 @@ export const Application = () => {
     setEndDate(values.end)
   }
 
+  useEffect(() => {}, [])
+
   useEffect(() => {
     const getLocations = async () => {
       const response = await axios.get(
         'https://data.nasa.gov/resource/y77d-th95.json'
       )
-      setData(response.data)
+
+      const filteredData = response.data.filter((d) => {
+        const yr = new Date(d.year).getFullYear()
+        return yr >= startDate.getFullYear() && yr <= endDate.getFullYear()
+      })
+
+      setData(filteredData)
     }
 
     getLocations()
-  }, [])
+  }, [startDate, endDate])
 
   return (
     <div>
