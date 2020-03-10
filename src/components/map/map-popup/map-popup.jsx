@@ -9,7 +9,11 @@ export const MapPopup = ({
     <form noValidate>
       <label htmlFor="name">Name</label>
       <LocalStorageFormControl id={id}>
-        <TextBox name="name" defaultValue={name} />
+        <TextBox
+          name="name"
+          defaultValue={name}
+          onBlur={() => console.log('name changed')}
+        />
       </LocalStorageFormControl>
 
       <LocalStorageFormControl id={id}>
@@ -49,7 +53,7 @@ export const MapPopup = ({
 //   })
 // }
 
-//const callAll = (...fns) => (...args) => fns.forEach((fn) => fn && fn(...args))
+const callAll = (...fns) => (...args) => fns.forEach((fn) => fn && fn(...args))
 
 // form control
 const LocalStorageFormControl = ({
@@ -94,7 +98,7 @@ const LocalStorageFormControl = ({
   }, [value, lsKey])
 
   return React.cloneElement(formControl, {
-    onBlur: (e) => setValue(e.target.value),
+    onBlur: callAll(formControl.props.onBlur, (e) => setValue(e.target.value)),
     defaultValue: value
   })
 }
