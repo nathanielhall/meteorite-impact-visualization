@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { ImportDialog } from './import-dialog'
+import { ImportDialog } from './ImportDialog'
 
 const setup = (propOverrides) => {
   const props = {

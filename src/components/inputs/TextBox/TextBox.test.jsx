@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { TextBox } from './text-box'
+import { TextBox } from './TextBox'
 
 const setup = (propOverrides) => {
   const props = {

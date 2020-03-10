@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { MapPopup } from './map-popup'
+import { MapPopup } from './MapPopup'
 
 const setup = (propOverrides) => {
   const props = {

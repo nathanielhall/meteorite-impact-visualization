@@ -1,8 +1,8 @@
 import React from 'react'
 //import PropTypes from 'prop-types'
-import { TextBox } from 'components/inputs/text-box'
-import { DatePicker } from 'components/inputs/date-picker'
-import { LocalStorageFormControl } from 'components/local-storage'
+import { TextBox } from 'components/inputs/TextBox'
+import { DatePicker } from 'components/inputs/DatePicker'
+import { LocalStorageFormControl } from 'components/LocalStorageFormControl'
 
 export const MapPopup = ({
   location: { id, year, name, nametype, recclass, mass, fall }

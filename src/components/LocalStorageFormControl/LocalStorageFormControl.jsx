@@ -35,11 +35,22 @@ export const LocalStorageFormControl = ({
 
     if (value) {
       const allChanges = accessLocalStorage(lsKey, [])
-      const change = { timestamp: new Date().toJSON(), value }
+
+      // TODO: clean up
+      let change = [{ timestamp: new Date().toJSON(), value }]
+      if (allChanges.length === 0) {
+        change = [
+          {
+            timestamp: new Date().toJSON(),
+            value: formControl.props.defaultValue
+          },
+          { timestamp: new Date().toJSON(), value }
+        ]
+      }
 
       window.localStorage.setItem(
         lsKey,
-        JSON.stringify([...allChanges, change])
+        JSON.stringify([...allChanges, ...change])
       )
     } else {
       window.localStorage.removeItem(lsKey)

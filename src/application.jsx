@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Map } from 'components/map'
-import { Header } from 'components/header'
+import { Map } from 'components/Map'
+import { Header } from 'components/Header'
 import Button from '@material-ui/core/Button'
-import { UserEdits } from 'components/user-edits'
-import { ImportDialog } from 'components/import-dialog'
+import { UserEdits } from 'components/UserEdits'
+import { ImportDialog } from 'components/ImportDialog'
 
 export const Application = () => {
   const [data, setData] = useState()
