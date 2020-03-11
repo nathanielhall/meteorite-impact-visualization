@@ -17,9 +17,13 @@ import {
 // TODO: determine if this should be moved into useEffect or outside component
 // TODO: think about removing the localstorage access to more easily test this
 export const UserEditsDialog = ({ onClose }) => {
-  const getHistory = () => {
+  // for each ls item
+  //
+
+  const getUserEdits = () => {
     let history = []
 
+    // FIXME: Use reduce?
     for (var i = 0; i < localStorage.length; i++) {
       const lsKey = localStorage.key(i)
 
@@ -28,20 +32,24 @@ export const UserEditsDialog = ({ onClose }) => {
         const keyParts = lsKey.split(':')
         const id = keyParts[1]
 
-        const report = lsValue.map((change, index) => {
+        const item = lsValue.map((change, index) => {
           return {
-            timestamp: new Date(change.timestamp).toDateString(),
+            timestamp: new Date(change.timestamp),
             id: id,
             original: index === 0 ? '' : lsValue[index - 1].value,
             updated: change.value
           }
         })
 
-        history = [...history, ...report]
+        history = [...history, ...item]
       }
     }
 
-    return history
+    // Sort by timestamp with last change on top
+    return history.sort((a, b) => {
+      if (a.timestamp < b.timestamp) return 1
+      if (a.timestamp > b.timestamp) return -1
+    })
   }
 
   return (
@@ -59,10 +67,10 @@ export const UserEditsDialog = ({ onClose }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {getHistory().map((row) => (
+              {getUserEdits().map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
-                    {row.timestamp}
+                    {row.timestamp.toDateString()}
                   </TableCell>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row.original}</TableCell>
