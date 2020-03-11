@@ -41,12 +41,12 @@ export const LocalStorageFormControl = ({
         allChanges.length === 0
           ? [
               {
-                timestamp: new Date().toJSON(),
+                timestamp: new Date().getTime(),
                 value: formControl.props.defaultValue
               },
-              { timestamp: new Date().toJSON(), value }
+              { timestamp: new Date().getTime(), value }
             ]
-          : [{ timestamp: new Date().toJSON(), value }]
+          : [{ timestamp: new Date().getTime(), value }]
 
       window.localStorage.setItem(
         lsKey,

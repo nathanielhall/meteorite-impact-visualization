@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Dialog,
   DialogTitle,
@@ -14,13 +14,12 @@ import {
   Paper
 } from '@material-ui/core'
 
-// TODO: determine if this should be moved into useEffect or outside component
-// TODO: think about removing the localstorage access to more easily test this
 export const UserEditsDialog = ({ onClose }) => {
-  const getUserEdits = () => {
-    let history = []
+  const [edits, setEdits] = useState()
 
-    // FIXME: Use reduce?
+  const getUserEdits = () => {
+    let allEdits = []
+
     for (var i = 0; i < localStorage.length; i++) {
       const lsKey = localStorage.key(i)
 
@@ -29,9 +28,9 @@ export const UserEditsDialog = ({ onClose }) => {
         const keyParts = lsKey.split(':')
         const id = keyParts[1]
 
-        const item = lsValue.map((change, index) => {
+        const locationEdits = lsValue.map((change, index) => {
           return {
-            key: change.timestamp,
+            key: `${change.timestamp}_${index}`,
             timestamp: new Date(change.timestamp),
             id: id,
             original: index === 0 ? '' : lsValue[index - 1].value,
@@ -39,46 +38,53 @@ export const UserEditsDialog = ({ onClose }) => {
           }
         })
 
-        history = [...history, ...item]
+        allEdits = [...allEdits, ...locationEdits]
       }
     }
 
     // Sort by timestamp with last change on top
-    return history.sort((a, b) => {
+    return allEdits.sort((a, b) => {
       if (a.timestamp < b.timestamp) return 1
       if (a.timestamp > b.timestamp) return -1
     })
   }
+
+  useEffect(() => {
+    const edits = getUserEdits()
+    setEdits(edits)
+  }, [])
 
   // FIXME: fix time format
   return (
     <Dialog open>
       <DialogTitle>User Edits</DialogTitle>
       <DialogContent>
-        <TableContainer component={Paper}>
-          <Table size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Timestamp</TableCell>
-                <TableCell>Id</TableCell>
-                <TableCell>Original</TableCell>
-                <TableCell>Updated</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {getUserEdits().map((row) => (
-                <TableRow key={row.key}>
-                  <TableCell component="th" scope="row">
-                    {row.timestamp.toISOString()}
-                  </TableCell>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.original}</TableCell>
-                  <TableCell>{row.updated}</TableCell>
+        {edits && (
+          <TableContainer component={Paper}>
+            <Table size="small" aria-label="a dense table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Timestamp</TableCell>
+                  <TableCell>Id</TableCell>
+                  <TableCell>Original</TableCell>
+                  <TableCell>Updated</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {getUserEdits().map((row) => (
+                  <TableRow key={row.key}>
+                    <TableCell component="th" scope="row">
+                      {row.timestamp.toISOString()}
+                    </TableCell>
+                    <TableCell>{row.id}</TableCell>
+                    <TableCell>{row.original}</TableCell>
+                    <TableCell>{row.updated}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </DialogContent>
       <DialogActions>
         <Button color="primary" onClick={onClose}>
