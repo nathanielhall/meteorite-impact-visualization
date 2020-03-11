@@ -24,6 +24,13 @@ npm install
 npm start
 ```
 
+This will launch the application in your browser at `http://localhost:8080`. If
+the browser doesn't open, try typing in the address.
+
+This is what you are looking for:
+
+<img src="screenshot.png" alt="App Screenshot" title="App Screenshot" width="700" />
+
 ### Scripts
 
 | `npm <script>` | Description               |
