@@ -7,7 +7,8 @@ export const TextBox = ({
   onBlur,
   onChange,
   value,
-  defaultValue
+  defaultValue,
+  disabled
 }) => (
   <MuiTextField
     name={name}
@@ -16,6 +17,7 @@ export const TextBox = ({
     onBlur={onBlur}
     value={value}
     fullWidth
+    disabled={disabled}
     InputLabelProps={{
       shrink: true
     }}
