@@ -31,6 +31,7 @@ export const UserEditsDialog = ({ onClose }) => {
 
         const item = lsValue.map((change, index) => {
           return {
+            key: change.timestamp,
             timestamp: new Date(change.timestamp),
             id: id,
             original: index === 0 ? '' : lsValue[index - 1].value,
@@ -49,6 +50,7 @@ export const UserEditsDialog = ({ onClose }) => {
     })
   }
 
+  // FIXME: fix time format
   return (
     <Dialog open>
       <DialogTitle>User Edits</DialogTitle>
@@ -65,9 +67,9 @@ export const UserEditsDialog = ({ onClose }) => {
             </TableHead>
             <TableBody>
               {getUserEdits().map((row) => (
-                <TableRow key={row.id}>
+                <TableRow key={row.key}>
                   <TableCell component="th" scope="row">
-                    {row.timestamp.toDateString()}
+                    {row.timestamp.toISOString()}
                   </TableCell>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row.original}</TableCell>
