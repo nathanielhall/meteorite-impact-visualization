@@ -6,7 +6,7 @@ const setup = (propOverrides) => {
   const props = {
     location: {
       name: 'Name',
-      year: '2001',
+      year: '1/2/2003',
       nametype: 'VALID',
       recclass: 'C',
       mass: '993.3',
@@ -34,7 +34,9 @@ describe('form displays', () => {
   })
   it('year', () => {
     const { year } = props.location
-    expect(wrapper.find('input[name="year"]').props().defaultValue).toBe(year)
+    expect(wrapper.find('input[name="year"]').props().defaultValue).toBe(
+      new Date(year).getFullYear()
+    )
   })
   it('nametype', () => {
     const { nametype } = props.location
