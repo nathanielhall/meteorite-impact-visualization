@@ -17,9 +17,31 @@ const setup = (propOverrides) => {
   }
 }
 
-test('<TextBox />', () => {
+test('renders', () => {
   const { wrapper } = setup()
   expect(wrapper.exists()).toBeTruthy()
 })
 
-test.todo('more tests')
+describe('when text is changed', () => {
+  it('calls the onChange handler', () => {
+    const {
+      wrapper,
+      props: { onChange }
+    } = setup()
+    const testValue = 'testabc'
+    wrapper.find('input').simulate('change', { target: { value: testValue } })
+    expect(onChange).toBeCalledTimes(1)
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({ target: { value: testValue } })
+    )
+  })
+})
+
+describe('when focus is lost', () => {
+  it('calls onBlur handler', () => {
+    const { wrapper, props } = setup()
+
+    wrapper.find('input').simulate('blur')
+    expect(props.onBlur).toBeCalledTimes(1)
+  })
+})

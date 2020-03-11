@@ -17,44 +17,44 @@ import {
 export const UserEditsDialog = ({ onClose }) => {
   const [edits, setEdits] = useState()
 
-  const getUserEdits = () => {
-    let allEdits = []
+  useEffect(() => {
+    const getUserEdits = () => {
+      let allEdits = []
 
-    for (var i = 0; i < localStorage.length; i++) {
-      const lsKey = localStorage.key(i)
+      for (var i = 0; i < localStorage.length; i++) {
+        const lsKey = localStorage.key(i)
 
-      if (lsKey.startsWith('mil:')) {
-        const lsValue = JSON.parse(localStorage.getItem(lsKey) || '')
-        const keyParts = lsKey.split(':')
-        const id = keyParts[1]
+        if (lsKey.startsWith('mil:')) {
+          const lsValue = JSON.parse(localStorage.getItem(lsKey) || '')
+          const keyParts = lsKey.split(':')
+          const id = keyParts[1]
 
-        const locationEdits = lsValue.map((change) => {
-          return {
-            key: change.timestamp,
-            timestamp: new Date(change.timestamp),
-            id: id,
-            original: change.previous,
-            updated: change.value
-          }
-        })
+          const locationEdits = lsValue.map((change) => {
+            return {
+              key: change.timestamp,
+              timestamp: new Date(change.timestamp),
+              id: id,
+              original: change.previous,
+              updated: change.value
+            }
+          })
 
-        allEdits = [...allEdits, ...locationEdits]
+          allEdits = [...allEdits, ...locationEdits]
+        }
       }
+
+      allEdits = allEdits.sort((a, b) => {
+        if (a.timestamp < b.timestamp) return 1
+        if (a.timestamp > b.timestamp) return -1
+      })
+
+      // Sort by timestamp with last change on top
+      setEdits(allEdits)
     }
 
-    // Sort by timestamp with last change on top
-    return allEdits.sort((a, b) => {
-      if (a.timestamp < b.timestamp) return 1
-      if (a.timestamp > b.timestamp) return -1
-    })
-  }
-
-  useEffect(() => {
-    const edits = getUserEdits()
-    setEdits(edits)
+    getUserEdits()
   }, [])
 
-  // FIXME: fix time format
   return (
     <Dialog open>
       <DialogTitle>User Edits</DialogTitle>
@@ -71,7 +71,7 @@ export const UserEditsDialog = ({ onClose }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {getUserEdits().map((row) => (
+                {edits.map((row) => (
                   <TableRow key={row.key}>
                     <TableCell component="th" scope="row">
                       {row.timestamp.toISOString()}
