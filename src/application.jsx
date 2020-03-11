@@ -9,7 +9,7 @@ import { ImportDialog } from 'components/ImportDialog'
 export const Application = () => {
   const [data, setData] = useState()
   const [startDate, setStartDate] = useState(new Date('01/01/2010'))
-  const [endDate, setEndDate] = useState(new Date('03/01/2020'))
+  const [endDate, setEndDate] = useState(new Date())
   const [showUserEdits, setShowUserEdits] = useState(false)
   const [showImportDialog, setShowImportDialog] = useState(false)
 
