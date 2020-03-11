@@ -18,8 +18,6 @@ export const Application = () => {
     setEndDate(values.end)
   }
 
-  useEffect(() => {}, [])
-
   useEffect(() => {
     const getLocations = async () => {
       const response = await axios.get(

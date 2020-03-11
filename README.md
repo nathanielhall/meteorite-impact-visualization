@@ -6,13 +6,13 @@ NOTE: This is a work in progress
 
 ## System Requirements
 
-- [git][git] v2 or greater
-- [NodeJS][node] v11 or greater
-- [npm][npm] v6 or greater
+- [Git](https://git-scm.com/) v2 or greater
+- [NodeJS](https://nodejs.org/en/) v11 or greater
+- [npm](https://www.npmjs.com/) v6 or greater
 
 ## Setup
 
-```
+```shell
 git clone https://github.com/nathanielhall/meteorite-impact-visualization.git
 cd meteorite-impact-visualization
 npm install

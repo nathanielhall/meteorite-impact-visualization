@@ -4,8 +4,8 @@ import { ImportDialog } from './ImportDialog'
 
 const setup = (propOverrides) => {
   const props = {
-    startDate: '',
-    endDate: '',
+    startDate: '01/01/2020',
+    endDate: '01/01/2020',
     onSubmit: jest.fn(),
     onClose: jest.fn(),
     ...propOverrides
@@ -31,11 +31,8 @@ test.skip('can submit the form with valid values', () => {
     startDateLocator,
     endDateLocator,
     submitLocator,
-    props
-  } = setup()
-
-  const startDate = '01/01/2020'
-  const endDate = '01/01/2020'
+    props: { onSubmit, startDate, endDate }
+  } = setup({ startDate: '01/01/2010', endDate: '01/01/2020' })
 
   wrapper
     .find(startDateLocator)
@@ -46,8 +43,8 @@ test.skip('can submit the form with valid values', () => {
 
   wrapper.find(submitLocator).simulate('click')
 
-  expect(props.onSubmit).toHaveBeenCalled(1)
-  expect(props.onSubmit).toHaveBeenCalledWith({
+  expect(onSubmit).toHaveBeenCalled(1)
+  expect(onSubmit).toHaveBeenCalledWith({
     start: startDate,
     end: endDate
   })

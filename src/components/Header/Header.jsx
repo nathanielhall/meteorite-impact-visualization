@@ -1,17 +1,11 @@
 import React from 'react'
 import { makeStyles, AppBar, Toolbar, Typography } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
+const useStyles = makeStyles({
   title: {
     flexGrow: 1
   }
-}))
+})
 
 export const Header = ({ title, children }) => {
   const classes = useStyles()
