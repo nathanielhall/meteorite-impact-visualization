@@ -28,12 +28,12 @@ export const UserEditsDialog = ({ onClose }) => {
         const keyParts = lsKey.split(':')
         const id = keyParts[1]
 
-        const locationEdits = lsValue.map((change, index) => {
+        const locationEdits = lsValue.map((change) => {
           return {
-            key: `${change.timestamp}_${index}`,
+            key: change.timestamp,
             timestamp: new Date(change.timestamp),
             id: id,
-            original: index === 0 ? '' : lsValue[index - 1].value,
+            original: change.previous,
             updated: change.value
           }
         })

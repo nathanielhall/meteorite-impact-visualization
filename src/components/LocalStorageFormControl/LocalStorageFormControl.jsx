@@ -35,22 +35,20 @@ export const LocalStorageFormControl = ({
 
     if (value) {
       const allChanges = accessLocalStorage(lsKey, [])
-
-      // if this is the first change made for this field, log the default value as well
-      const change =
+      const previousValue =
         allChanges.length === 0
-          ? [
-              {
-                timestamp: new Date().getTime(),
-                value: formControl.props.defaultValue
-              },
-              { timestamp: new Date().getTime(), value }
-            ]
-          : [{ timestamp: new Date().getTime(), value }]
+          ? formControl.props.defaultValue
+          : allChanges[allChanges.length - 1].value
+
+      const change = {
+        timestamp: new Date().getTime(),
+        previous: previousValue,
+        value
+      }
 
       window.localStorage.setItem(
         lsKey,
-        JSON.stringify([...allChanges, ...change])
+        JSON.stringify([...allChanges, change])
       )
     } else {
       window.localStorage.removeItem(lsKey)
