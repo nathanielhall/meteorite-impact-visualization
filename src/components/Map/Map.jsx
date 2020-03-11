@@ -17,7 +17,7 @@ export const Map = ({ data }) => {
     <LeafletMap
       style={{ width: '100%', height: '90vh' }}
       center={[45.4, -75.7]}
-      zoom={2}
+      zoom={3}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
