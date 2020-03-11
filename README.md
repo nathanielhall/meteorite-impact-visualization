@@ -2,8 +2,6 @@
 
 > React application for visualizing Earth meteorite impact locations
 
-NOTE: This is a work in progress
-
 ## System Requirements
 
 - [Git](https://git-scm.com/) v2 or greater
