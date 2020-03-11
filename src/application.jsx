@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Map } from 'components/Map'
 import { Header } from 'components/Header'
 import Button from '@material-ui/core/Button'
-import { UserEdits } from 'components/UserEdits'
+import { UserEditsDialog } from 'components/UserEditsDialog'
 import { ImportDialog } from 'components/ImportDialog'
 
 export const Application = () => {
@@ -48,7 +48,9 @@ export const Application = () => {
         </Button>
       </Header>
       <main>{data && <Map data={data} />}</main>
-      {showUserEdits && <UserEdits onClose={() => setShowUserEdits(false)} />}
+      {showUserEdits && (
+        <UserEditsDialog onClose={() => setShowUserEdits(false)} />
+      )}
       {showImportDialog && (
         <ImportDialog
           startDate={startDate}
