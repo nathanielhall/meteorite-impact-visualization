@@ -17,9 +17,6 @@ import {
 // TODO: determine if this should be moved into useEffect or outside component
 // TODO: think about removing the localstorage access to more easily test this
 export const UserEditsDialog = ({ onClose }) => {
-  // for each ls item
-  //
-
   const getUserEdits = () => {
     let history = []
 
