@@ -66,3 +66,10 @@ The application allows the user to interact with the map:
 1. Zooming in and out, and panning the map using the keyboard and mouse
 2. Click a single point to view the associated data as a popup.
 3. Make changes to the data displayed in the popup.
+
+## Todo
+
+These are remaining tasks:
+
+- [ ] Ability to edit the location date and coordinates
+- [ ] More tests, mainly integration
