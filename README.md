@@ -29,7 +29,7 @@ This is what you are looking for:
 
 <img src="screenshot.png" alt="App Screenshot" title="App Screenshot" width="700" />
 
-### Scripts
+## Scripts
 
 | `npm <script>` | Description               |
 | -------------- | ------------------------- |
@@ -38,3 +38,31 @@ This is what you are looking for:
 | `test`         | run jest                  |
 | `lint`         | lint js(x) files          |
 | `prettier`     | run prettier              |
+
+## About the app
+
+This application takes meteorite impact locations from,
+https://data.nasa.gov/resource/y77d-th95.json, and plots them onto a Map. The
+map is built using [React Leaflet](https://react-leaflet.js.org/).
+
+The application provides an "Import" button that will re-import the data for the
+specified start and end dates. The default start date is 2010, and the end date
+is the current year. I chose to use the year rather than date since the data is
+specified this way. The data doesn't contain a full date, only a year.
+
+The application provides a way to view a table of user edits. This can be
+accessed by clicking the "Edits" button. This table will show all user edits in
+the order of last change on top.
+
+The table displays the following columns:
+
+1. timestamp,
+2. id of the record changed,
+3. the original data,
+4. the updated data.
+
+The application allows the user to interact with the map:
+
+1. Zooming in and out, and panning the map using the keyboard and mouse
+2. Click a single point to view the associated data as a popup.
+3. Make changes to the data displayed in the popup.
