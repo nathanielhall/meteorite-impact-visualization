@@ -30,6 +30,7 @@ export const Map = ({ data }) => {
             <Marker
               key={location.id}
               position={[location.reclat, location.reclong]}
+              data-test-id={`marker_${location.id}`}
             >
               <Popup className={classes.popup}>
                 <MapPopup location={location} />
