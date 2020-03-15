@@ -1,11 +1,6 @@
-# Meteorite Impact Visualization
+# Meteorite Impact Visualization <img alt="Travis CI badge" src="https://travis-ci.org/nathanielhall/meteorite-impact-visualization.svg?branch=refactor">
 
 > React application for visualizing Earth meteorite impact locations
-
-<br />
-<div align="center">
-  <img alt="Travis CI badge" src="https://travis-ci.org/nathanielhall/meteorite-impact-visualization.svg?branch=refactor">
-</div>
 
 ## System Requirements
 
