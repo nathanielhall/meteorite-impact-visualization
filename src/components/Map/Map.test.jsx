@@ -74,7 +74,7 @@ const setup = (propOverrides) => {
     <Map {...props}>
       {testData.map((impact) => (
         <MapMarker
-          id={impact.id} // TODO: do we need to provide an id and key here?
+          id={impact.id}
           key={impact.id}
           onClose={jest.fn()}
           latitude={impact.reclat}
@@ -98,9 +98,7 @@ test('<Map /> renders', () => {
 
 describe('<Map /> markers', () => {
   const { wrapper } = setup()
-  it.each(testData)('exist for each location', (location) => {
-    expect(
-      wrapper.find(`[data-test-id="marker_${location.id}"]`).exists()
-    ).toBeTruthy()
+  it.each(testData)('exist for each location', ({ id }) => {
+    expect(wrapper.find(`[data-test-id="marker_${id}"]`).exists()).toBeTruthy()
   })
 })

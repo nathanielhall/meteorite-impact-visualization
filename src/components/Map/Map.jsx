@@ -24,12 +24,15 @@ const useStyles = makeStyles({
     width: '310px'
   }
 })
-export const MapMarker = ({ onClose, children, id, latitude, longitude }) => {
+export const MapMarker = ({ id, onClose, children, latitude, longitude }) => {
   const classes = useStyles()
+
+  // TODO: Validate longitude / latitude rather than just check for falsy value
+  if (!latitude || !longitude) return null
 
   return (
     <Marker
-      key={id}
+      id={id}
       position={[latitude, longitude]}
       data-test-id={`marker_${id}`}
     >

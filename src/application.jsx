@@ -51,7 +51,6 @@ export const Application = () => {
       return yr >= startDate.getFullYear() && yr <= endDate.getFullYear()
     })
 
-    console.log('data has been loaded', 'data load')
     setData(filterDataWithEdits)
   }
 
@@ -73,6 +72,7 @@ export const Application = () => {
         <Map>
           {data.map((impact) => (
             <MapMarker // TODO: provide an ID here?
+              id={impact.id}
               key={impact.id}
               onClose={importLocations}
               latitude={impact.reclat}
