@@ -9,7 +9,12 @@ import {
   Grid
 } from '@material-ui/core'
 
-export const ImportDialog = ({ startDate, endDate, onSubmit, onClose }) => {
+export const MeteoriteImpactImport = ({
+  startDate,
+  endDate,
+  onSubmit,
+  onClose
+}) => {
   const [values, setValues] = useState({
     start: startDate,
     end: endDate

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Map, MapMarker } from 'components/Map'
-import { ImpactLocationForm } from 'components/ImpactLocationForm'
 import { Header } from 'components/Header'
 import Button from '@material-ui/core/Button'
-import { UserEditsDialog } from 'components/UserEditsDialog'
-import { ImportDialog } from 'components/ImportDialog'
 import { getMostRecentEdits } from './local-storage'
+import {
+  MeteoriteImpactForm,
+  MeteoriteImpactImport,
+  MeteoriteImpactEdits
+} from 'components/MeteoriteImpact'
 
 export const Application = () => {
   const [data, setData] = useState([])
@@ -76,16 +78,16 @@ export const Application = () => {
               latitude={impact.reclat}
               longitude={impact.reclong}
             >
-              <ImpactLocationForm location={impact} />
+              <MeteoriteImpactForm location={impact} />
             </MapMarker>
           ))}
         </Map>
       </main>
       {showUserEdits && (
-        <UserEditsDialog onClose={() => setShowUserEdits(false)} />
+        <MeteoriteImpactEdits onClose={() => setShowUserEdits(false)} />
       )}
       {showImportDialog && (
-        <ImportDialog
+        <MeteoriteImpactImport
           startDate={startDate}
           endDate={endDate}
           onSubmit={onSubmit}

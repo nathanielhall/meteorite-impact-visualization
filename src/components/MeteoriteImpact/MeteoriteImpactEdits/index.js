@@ -1,0 +1,1 @@
+export { MeteoriteImpactEdits } from './MeteoriteImpactEdits'

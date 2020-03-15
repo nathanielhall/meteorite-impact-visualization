@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core'
 import { format } from 'date-fns'
 
-export const UserEditsDialog = ({ onClose }) => {
+export const MeteoriteImpactEdits = ({ onClose }) => {
   const [edits, setEdits] = useState()
 
   useEffect(() => {

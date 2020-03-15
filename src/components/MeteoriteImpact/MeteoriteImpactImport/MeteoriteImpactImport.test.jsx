@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { ImportDialog } from './ImportDialog'
+import { MeteoriteImpactImport } from './MeteoriteImpactImport'
 
 const setup = (propOverrides) => {
   const props = {
@@ -10,7 +10,7 @@ const setup = (propOverrides) => {
     onClose: jest.fn(),
     ...propOverrides
   }
-  const wrapper = mount(<ImportDialog {...props} />)
+  const wrapper = mount(<MeteoriteImpactImport {...props} />)
   return {
     props,
     wrapper,

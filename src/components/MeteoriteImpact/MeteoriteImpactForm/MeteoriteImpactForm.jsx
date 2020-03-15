@@ -3,7 +3,7 @@ import { TextBox } from 'components/Inputs/TextBox'
 import { LocalStorageFormControl } from 'components/LocalStorageFormControl'
 import { format } from 'date-fns'
 
-export const ImpactLocationForm = ({
+export const MeteoriteImpactForm = ({
   location: { id, name, year, nametype, recclass, mass, fall }
 }) => {
   const formattedYear = format(new Date(year), 'yyyy-MM-dd')
