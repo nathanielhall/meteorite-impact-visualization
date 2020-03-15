@@ -2,17 +2,8 @@ import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import { MapPopup } from './MapPopup'
 
-const useStyles = makeStyles({
-  popup: {
-    width: '310px'
-  }
-})
-
-export const Map = ({ data }) => {
-  const classes = useStyles()
-
+export const Map = ({ children }) => {
   return (
     <LeafletMap
       style={{ width: '100%', height: '90vh' }}
@@ -23,21 +14,27 @@ export const Map = ({ data }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {data.map(
-        (location) =>
-          location.reclat &&
-          location.reclong && (
-            <Marker
-              key={location.id}
-              position={[location.reclat, location.reclong]}
-            >
-              <Popup className={classes.popup}>
-                <MapPopup location={location} />
-              </Popup>
-            </Marker>
-          )
-      )}
+      {children}
     </LeafletMap>
+  )
+}
+
+const useStyles = makeStyles({
+  popup: {
+    width: '310px'
+  }
+})
+export const MapMarker = ({ onClose, children, id, latitude, longitude }) => {
+  const classes = useStyles()
+
+  return (
+    <Marker key={id} position={[latitude, longitude]}>
+      {children ? (
+        <Popup className={classes.popup} onClose={onClose}>
+          {children}
+        </Popup>
+      ) : null}
+    </Marker>
   )
 }
 

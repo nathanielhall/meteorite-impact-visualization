@@ -1,6 +1,9 @@
 import React, { useState, Children, useEffect } from 'react'
 const callAll = (...fns) => (...args) => fns.forEach((fn) => fn && fn(...args))
 
+// TODO: Enforce the rule that
+//    - one child
+//    - must have props for: name and defaultValue
 export const LocalStorageFormControl = ({
   id,
   children,
@@ -50,8 +53,6 @@ export const LocalStorageFormControl = ({
         lsKey,
         JSON.stringify([...allChanges, change])
       )
-    } else {
-      window.localStorage.removeItem(lsKey)
     }
   }, [value, lsKey])
 

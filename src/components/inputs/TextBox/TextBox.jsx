@@ -8,10 +8,12 @@ export const TextBox = ({
   onChange,
   value,
   defaultValue,
-  disabled
+  disabled,
+  type
 }) => (
   <MuiTextField
     name={name}
+    type={type}
     label={label}
     onChange={onChange}
     onBlur={onBlur}

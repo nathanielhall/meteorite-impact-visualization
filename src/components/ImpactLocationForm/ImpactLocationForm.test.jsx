@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { MapPopup } from './MapPopup'
+import { ImpactLocationForm } from './ImpactLocationForm'
 
 const setup = (propOverrides) => {
   const props = {
@@ -14,14 +14,14 @@ const setup = (propOverrides) => {
     },
     ...propOverrides
   }
-  const wrapper = mount(<MapPopup {...props} />)
+  const wrapper = mount(<ImpactLocationForm {...props} />)
   return {
     props,
     wrapper
   }
 }
 
-test('<MapPopup /> renders', () => {
+test('renders', () => {
   const { wrapper } = setup()
   expect(wrapper.exists()).toBeTruthy()
 })

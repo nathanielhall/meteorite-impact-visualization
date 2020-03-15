@@ -13,6 +13,7 @@ import {
   TableRow,
   Paper
 } from '@material-ui/core'
+import { format } from 'date-fns'
 
 export const UserEditsDialog = ({ onClose }) => {
   const [edits, setEdits] = useState()
@@ -74,7 +75,7 @@ export const UserEditsDialog = ({ onClose }) => {
                 {edits.map((row) => (
                   <TableRow key={row.key}>
                     <TableCell component="th" scope="row">
-                      {row.timestamp.toISOString()}
+                      {format(new Date(row.timestamp), 'MM/dd/yyyy hh:mm a')}
                     </TableCell>
                     <TableCell>{row.id}</TableCell>
                     <TableCell>{row.original}</TableCell>

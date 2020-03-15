@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Map } from 'components/Map'
+import { Map, MapMarker } from 'components/Map'
+import { ImpactLocationForm } from 'components/ImpactLocationForm'
 import { Header } from 'components/Header'
 import Button from '@material-ui/core/Button'
 import { UserEditsDialog } from 'components/UserEditsDialog'
 import { ImportDialog } from 'components/ImportDialog'
+import { getMostRecentEdits } from './local-storage'
 
 export const Application = () => {
-  const [data, setData] = useState()
+  const [data, setData] = useState([])
   const [startDate, setStartDate] = useState(new Date('01/01/2010'))
   const [endDate, setEndDate] = useState(new Date())
   const [showUserEdits, setShowUserEdits] = useState(false)
@@ -18,21 +20,41 @@ export const Application = () => {
     setEndDate(values.end)
   }
 
-  useEffect(() => {
-    const getLocations = async () => {
-      const response = await axios.get(
-        'https://data.nasa.gov/resource/y77d-th95.json'
-      )
+  const importLocations = async () => {
+    // 1) Retrieve data from api
+    const response = await axios.get(
+      'https://data.nasa.gov/resource/y77d-th95.json'
+    )
 
-      const filteredData = response.data.filter((d) => {
-        const yr = new Date(d.year).getFullYear()
-        return yr >= startDate.getFullYear() && yr <= endDate.getFullYear()
+    // 2) Merge local storage updates (year and coordinate changes only)
+    const allEdits = getMostRecentEdits()
+    const edits = allEdits.filter((d) => d.field === 'year')
+
+    let updatedData = []
+    if (edits && edits.length > 0) {
+      // apply user edits to the data retrieved from api
+      updatedData = response.data.map((d) => {
+        let found = edits.find((edit) => edit.id === d.id)
+
+        // TODO: validate that the year is a valid date
+        return found ? { ...d, year: new Date(found.year) } : d
       })
-
-      setData(filteredData)
+    } else {
+      updatedData = response.data
     }
 
-    getLocations()
+    // 3) Filter data by start and end dates
+    const filterDataWithEdits = updatedData.filter((d) => {
+      const yr = new Date(d.year).getFullYear()
+      return yr >= startDate.getFullYear() && yr <= endDate.getFullYear()
+    })
+
+    console.log('data has been loaded', 'data load')
+    setData(filterDataWithEdits)
+  }
+
+  useEffect(() => {
+    importLocations()
   }, [startDate, endDate])
 
   return (
@@ -45,7 +67,20 @@ export const Application = () => {
           Import
         </Button>
       </Header>
-      <main>{data && <Map data={data} />}</main>
+      <main>
+        <Map>
+          {data.map((impact) => (
+            <MapMarker
+              key={impact.id}
+              onClose={importLocations}
+              latitude={impact.reclat}
+              longitude={impact.reclong}
+            >
+              <ImpactLocationForm location={impact} />
+            </MapMarker>
+          ))}
+        </Map>
+      </main>
       {showUserEdits && (
         <UserEditsDialog onClose={() => setShowUserEdits(false)} />
       )}
