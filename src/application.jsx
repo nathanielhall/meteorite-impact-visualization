@@ -72,7 +72,7 @@ export const Application = () => {
       <main>
         <Map>
           {data.map((impact) => (
-            <MapMarker
+            <MapMarker // TODO: provide an ID here?
               key={impact.id}
               onClose={importLocations}
               latitude={impact.reclat}

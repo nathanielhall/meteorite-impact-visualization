@@ -28,7 +28,11 @@ export const MapMarker = ({ onClose, children, id, latitude, longitude }) => {
   const classes = useStyles()
 
   return (
-    <Marker key={id} position={[latitude, longitude]}>
+    <Marker
+      key={id}
+      position={[latitude, longitude]}
+      data-test-id={`marker_${id}`}
+    >
       {children ? (
         <Popup className={classes.popup} onClose={onClose}>
           {children}

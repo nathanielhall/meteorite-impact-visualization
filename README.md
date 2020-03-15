@@ -71,5 +71,6 @@ The application allows the user to interact with the map:
 
 These are remaining tasks:
 
-- [ ] Ability to edit the location date and coordinates
+- [x] Ability to edit the location date
+- [ ] Ability to edit coordinates
 - [ ] More tests, mainly integration

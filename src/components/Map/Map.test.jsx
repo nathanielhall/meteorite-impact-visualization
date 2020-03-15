@@ -1,7 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { Map } from './Map'
-import { Marker } from 'react-leaflet'
+import { Map, MapMarker } from './Map'
 
 const testData = [
   {
@@ -71,7 +70,21 @@ const setup = (propOverrides) => {
     data: testData,
     ...propOverrides
   }
-  const wrapper = mount(<Map {...props} />)
+  const wrapper = mount(
+    <Map {...props}>
+      {testData.map((impact) => (
+        <MapMarker
+          id={impact.id} // TODO: do we need to provide an id and key here?
+          key={impact.id}
+          onClose={jest.fn()}
+          latitude={impact.reclat}
+          longitude={impact.reclong}
+        >
+          <span>Form goes here</span>
+        </MapMarker>
+      ))}
+    </Map>
+  )
   return {
     props,
     wrapper
