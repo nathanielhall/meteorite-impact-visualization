@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextBox } from 'components/Inputs/TextBox'
+import { TextBox } from 'components/FormControls/TextBox'
 import { LocalStorageFormControl } from 'components/LocalStorageFormControl'
 import { format } from 'date-fns'
 
