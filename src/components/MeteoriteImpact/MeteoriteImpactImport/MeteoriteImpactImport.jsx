@@ -56,6 +56,7 @@ export const MeteoriteImpactImport = ({
                 views={['year']}
                 autoOk
                 disableFuture
+                maxDate={end}
               />
             </Grid>
             <Grid item>
@@ -67,6 +68,7 @@ export const MeteoriteImpactImport = ({
                 views={['year']}
                 autoOk
                 disableFuture
+                minDate={start}
               />
             </Grid>
           </Grid>

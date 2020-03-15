@@ -15,7 +15,8 @@ export const DatePicker = ({
   format,
   disableFuture,
   autoOk,
-  defaultValue
+  maxDate,
+  minDate
 }) => {
   const onChangeHandler = (value) => {
     const event = {
@@ -37,7 +38,8 @@ export const DatePicker = ({
         disableFuture={disableFuture}
         autoOk={autoOk}
         invalidDateMessage={''}
-        defaultValue={defaultValue}
+        minDate={minDate}
+        maxDate={maxDate}
       />
     </MuiPickersUtilsProvider>
   )
