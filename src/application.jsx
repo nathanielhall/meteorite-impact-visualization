@@ -38,8 +38,20 @@ export const Application = () => {
       updatedData = response.data.map((d) => {
         let found = edits.find((edit) => edit.id === d.id)
 
-        // TODO: validate that the year is a valid date
-        return found ? { ...d, year: new Date(found.year) } : d
+        // This data has NOT been edited, return original value
+        if (!found) return d
+
+        // Found an edit, however it is an INVALID date, return original value
+        let parsedDate = Date.parse(found.value)
+
+        if (!parsedDate || isNaN(parsedDate)) {
+          console.warn(
+            'A user edit contains an invalid date. This value is being ignored.'
+          )
+          return d
+        }
+
+        return { ...d, year: new Date(parsedDate) }
       })
     } else {
       updatedData = response.data
@@ -71,7 +83,7 @@ export const Application = () => {
       <main>
         <Map>
           {data.map((impact) => (
-            <MapMarker // TODO: provide an ID here?
+            <MapMarker
               id={impact.id}
               key={impact.id}
               onClose={importLocations}
