@@ -1,6 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { MeteoriteImpactForm } from './MeteoriteImpactForm'
+import { format } from 'date-fns'
 
 const setup = (propOverrides) => {
   const props = {
@@ -34,9 +35,12 @@ describe('form displays', () => {
   })
 
   // FIXME: fix this test
-  it.skip('year', () => {
+  it('year', () => {
     const { year } = props.location
-    expect(wrapper.find('input[name="year"]').props().defaultValue).toBe(year)
+    const formattedYear = format(new Date(year), 'yyyy-MM-dd')
+    expect(wrapper.find('input[name="year"]').props().defaultValue).toBe(
+      formattedYear
+    )
   })
   it('nametype', () => {
     const { nametype } = props.location
@@ -57,5 +61,17 @@ describe('form displays', () => {
   it('fall', () => {
     const { fall } = props.location
     expect(wrapper.find('input[name="fall"]').props().defaultValue).toBe(fall)
+  })
+  it('latitude', () => {
+    const { reclat } = props.location
+    expect(wrapper.find('input[name="reclat"]').props().defaultValue).toBe(
+      reclat
+    )
+  })
+  it('longitude', () => {
+    const { reclong } = props.location
+    expect(wrapper.find('input[name="reclong"]').props().defaultValue).toBe(
+      reclong
+    )
   })
 })
