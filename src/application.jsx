@@ -29,31 +29,47 @@ export const Application = () => {
     )
 
     // 2) Merge local storage updates (year and coordinate changes only)
-    const allEdits = getMostRecentEdits()
-    const edits = allEdits.filter((d) => d.field === 'year')
+    const edits = getMostRecentEdits().filter(
+      (d) => d.field === 'year' || d.field === 'reclat' || d.field === 'reclong'
+    )
 
     let updatedData = []
     if (edits && edits.length > 0) {
       // apply user edits to the data retrieved from api
       updatedData = response.data.map((d) => {
-        let found = edits.find((edit) => edit.id === d.id)
+        let foundUserEdits = edits.filter((edit) => edit.id === d.id)
 
-        // This data has NOT been edited, return original value
-        if (!found) return d
+        // No edits exist for this data item, return original
+        if (!foundUserEdits || foundUserEdits.length <= 0) return d
 
-        // Found an edit, however it is an INVALID date, return original value
-        let parsedDate = Date.parse(found.value)
+        // apply one ore more changes to this data row
+        const mergeChange = (change) => {
+          if (change.field === 'year') {
+            let [year, month, day] = change.value.split('-')
+            let parsedDate = new Date(
+              parseInt(year),
+              parseInt(month),
+              parseInt(day)
+            )
 
-        if (!parsedDate || isNaN(parsedDate)) {
-          console.warn(
-            'A user edit contains an invalid date. This value is being ignored.'
-          )
-          return d
+            return { ...d, [change.field]: parsedDate }
+          } else {
+            return { ...d, [change.field]: change.value }
+          }
         }
 
-        return { ...d, year: new Date(parsedDate) }
+        if (Array.isArray(foundUserEdits)) {
+          foundUserEdits.forEach((item) => {
+            d = mergeChange(item)
+          })
+        } else {
+          d = mergeChange(foundUserEdits)
+        }
+
+        return d
       })
     } else {
+      // no user edits
       updatedData = response.data
     }
 

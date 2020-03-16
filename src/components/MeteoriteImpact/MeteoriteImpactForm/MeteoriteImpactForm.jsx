@@ -4,7 +4,7 @@ import { LocalStorageFormControl } from 'components/LocalStorageFormControl'
 import { format } from 'date-fns'
 
 export const MeteoriteImpactForm = ({
-  location: { id, name, year, nametype, recclass, mass, fall }
+  location: { id, name, year, nametype, recclass, mass, fall, reclat, reclong }
 }) => {
   const formattedYear = format(new Date(year), 'yyyy-MM-dd')
   return (
@@ -36,6 +36,22 @@ export const MeteoriteImpactForm = ({
 
       <LocalStorageFormControl id={id}>
         <TextBox name="fall" label="Fall" defaultValue={fall} />
+      </LocalStorageFormControl>
+      <LocalStorageFormControl id={id}>
+        <TextBox
+          name="reclat"
+          label="Latitude"
+          defaultValue={reclat}
+          type="number"
+        />
+      </LocalStorageFormControl>
+      <LocalStorageFormControl id={id}>
+        <TextBox
+          name="reclong"
+          label="Longitude"
+          defaultValue={reclong}
+          type="number"
+        />
       </LocalStorageFormControl>
     </form>
   )
