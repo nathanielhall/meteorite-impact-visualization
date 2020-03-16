@@ -1,6 +1,5 @@
 import React from 'react'
-import { TextBox } from 'components/FormControls/TextBox'
-import { LocalStorageFormControl } from 'components/LocalStorageFormControl'
+import { LocalStorageFormControl, TextBox } from 'components/FormControls'
 import { format } from 'date-fns'
 
 export const MeteoriteImpactForm = ({

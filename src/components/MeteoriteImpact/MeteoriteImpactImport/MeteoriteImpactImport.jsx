@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DatePicker } from 'components/FormControls/DatePicker'
+import { DatePicker } from 'components/FormControls'
 import Button from '@material-ui/core/Button'
 import {
   Dialog,
