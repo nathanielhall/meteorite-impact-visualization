@@ -1,1 +1,0 @@
-export { MeteoriteImpactImport } from './MeteoriteImpactImport'

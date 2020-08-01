@@ -9,7 +9,7 @@ import {
   Grid
 } from '@material-ui/core'
 
-export const MeteoriteImpactImport = ({
+export const MeteoriteImpactFilter = ({
   startDate,
   endDate,
   onSubmit,
@@ -79,7 +79,7 @@ export const MeteoriteImpactImport = ({
             Close
           </Button>
           <Button color="primary" type="submit">
-            Import
+            Filter
           </Button>
         </DialogActions>
       </form>

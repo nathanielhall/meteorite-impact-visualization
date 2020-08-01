@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import { getMostRecentEdits } from './local-storage'
 import {
   MeteoriteImpactForm,
-  MeteoriteImpactImport,
+  MeteoriteImpactFilter,
   MeteoriteImpactEdits
 } from 'components/MeteoriteImpact'
 
@@ -93,7 +93,7 @@ export const Application = () => {
           Edits
         </Button>
         <Button color="inherit" onClick={() => setShowImportDialog(true)}>
-          Import
+          Filter
         </Button>
       </Header>
       <main>
@@ -115,7 +115,7 @@ export const Application = () => {
         <MeteoriteImpactEdits onClose={() => setShowUserEdits(false)} />
       )}
       {showImportDialog && (
-        <MeteoriteImpactImport
+        <MeteoriteImpactFilter
           startDate={startDate}
           endDate={endDate}
           onSubmit={onSubmit}

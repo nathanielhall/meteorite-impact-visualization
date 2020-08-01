@@ -1,0 +1,1 @@
+export { MeteoriteImpactFilter } from './MeteoriteImpactFilter'
